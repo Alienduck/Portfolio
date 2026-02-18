@@ -1,13 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { gsap } from 'gsap'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+  const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.from('nav', { y: -80, opacity: 0, duration: 1, ease: 'expo.out', delay: 0.2 })
+    const ctx = gsap.context(() => {
+      gsap.from(navRef.current, { 
+        y: -80, 
+        opacity: 0, 
+        duration: 1, 
+        ease: 'expo.out', 
+        delay: 0.2 
+      })
+    })
+    
+    return () => ctx.revert()
   }, [])
 
   useEffect(() => {
@@ -17,7 +28,7 @@ export default function Nav() {
   }, [])
 
   return (
-    <nav className={scrolled ? 'scrolled' : ''}>
+    <nav ref={navRef} className={scrolled ? 'scrolled' : ''}>
       <Link to="/" className="nav-logo">DEV.PORT</Link>
       <ul className="nav-links">
         <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
