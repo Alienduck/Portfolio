@@ -1,0 +1,271 @@
+.projects-page {
+  padding-top: 5rem;
+}
+
+/* ===== HERO ===== */
+.projects-hero {
+  padding: 5rem 8vw 3rem;
+}
+
+.projects-header-content {
+  margin-bottom: 3rem;
+}
+
+.projects-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.projects-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.projects-filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  font-family: "Space Mono", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: transparent;
+  border-radius: 2px;
+  transition: all 0.2s;
+  cursor: none;
+}
+
+.filter-btn:hover {
+  border-color: var(--violet-bright);
+  color: var(--text);
+}
+
+.filter-btn.active {
+  background: var(--violet);
+  border-color: var(--violet);
+  color: white;
+}
+
+/* ===== GRID ===== */
+.projects-grid-section {
+  padding: 2rem 8vw 8rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 2rem;
+  background: var(--bg);
+  overflow: hidden;
+  transition: background 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card:hover {
+  background: var(--bg-2);
+}
+
+.project-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.project-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.project-year {
+  font-family: "Space Mono", monospace;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.project-status {
+  font-family: "Space Mono", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.status-live {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+}
+
+.status-complete {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--blue-bright);
+}
+
+.status-wip {
+  background: rgba(234, 179, 8, 0.1);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  color: #eab308;
+}
+
+.project-icon {
+  color: var(--text-muted);
+  transition:
+    color 0.2s,
+    transform 0.3s;
+}
+
+.project-card:hover .project-icon {
+  color: var(--card-color, var(--violet-bright));
+  transform: translate(3px, -3px);
+}
+
+.project-card-body {
+  flex: 1;
+  margin-bottom: 1.5rem;
+}
+
+.project-name {
+  font-family: "Syne", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+  transition: color 0.2s;
+}
+
+.project-card:hover .project-name {
+  color: var(--card-color, var(--violet-bright));
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-tag {
+  font-family: "Space Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-muted);
+}
+
+.project-card-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--card-color, var(--violet)),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.project-card:hover .project-card-glow {
+  opacity: 1;
+}
+
+.project-card-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--card-color, var(--violet));
+  transition: width 0.4s ease;
+}
+
+.project-card:hover .project-card-line {
+  width: 100%;
+}
+
+/* ===== GITHUB CTA ===== */
+.projects-github-cta {
+  padding: 0 8vw 8rem;
+}
+
+.github-cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2.5rem 3rem;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.github-cta-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at left,
+    rgba(59, 130, 246, 0.05),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.github-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.github-cta-inner h3 {
+  font-family: "Syne", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.github-cta-inner p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.github-cta-inner .btn-primary {
+  margin-left: auto;
+  flex-shrink: 0;
+}
