@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 // Tunic-inspired sacred cross / konami-style easter egg
 // The Tunic fox explores ruins and discovers a language. The sacred cross is an icon.
 // Sequence: ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight
-const TUNIC_SEQUENCE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
+const TUNIC_SEQUENCE = ['ArrowUp', 'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowRight']
 
 export default function About() {
   const [tunicUnlocked, setTunicUnlocked] = useState(false)
@@ -93,15 +93,15 @@ export default function About() {
   const interests = [
     {
       icon: '🦊',
-      title: 'Jeux vidéo',
-      desc: 'Des mondes qui racontent des histoires à travers leur design, leur mystère et leur langage.',
-      highlight: false,
+      title: 'Game dev',
+      desc: "Le développement de jeu est un processus long et parfois éprouvant, qui aboutis à des chefs d'oeuvres.",
+      highlight: true,
     },
     {
       icon: '⚗️',
-      title: 'Algorithmique',
-      desc: 'Trouver l\'élégance dans la logique, résoudre des puzzles qui n\'ont pas encore de solution.',
-      highlight: false,
+      title: 'Algo',
+      desc: "Trouver des solutions à des problèmes plus ou moins complexes et avec différentes manières.",
+      highlight: true,
     },
     {
       icon: '🎨',
@@ -110,21 +110,21 @@ export default function About() {
       highlight: false,
     },
     {
-      icon: '📡',
-      title: 'Systèmes distribués',
-      desc: 'L\'orchestration de services, la resilience, l\'architecture à grande échelle.',
+      icon: '🔨',
+      title: 'Architecture',
+      desc: "Quelque chose que l'on apprend plus avec le temps et l'expérience qu'à l'école.",
       highlight: false,
     },
     {
       icon: '🔭',
       title: 'Sciences & IA',
-      desc: 'L\'apprentissage automatique comme outil, pas comme mystère.',
+      desc: "Chat GPT n'est pas une IA mais un LLM, pour moi les seuls vrais algos d'IA sont fait avec NEAT",
       highlight: false,
     },
     {
       icon: '🌿',
-      title: 'Exploration',
-      desc: 'Explorer des lieux, des idées et des codes que personne n\'a encore vraiment compris.',
+      title: 'Boxe',
+      desc: 'Un peu de sport n\'a jamais tué qui que ce soit.',
       highlight: true,
     },
   ]
@@ -137,20 +137,19 @@ export default function About() {
           <h1 className="about-headline">
             <div>Étudiant.</div>
             <div><span className="gradient-text">Développeur.</span></div>
-            <div>Curieux.</div>
+            <div>Passionné.</div>
           </h1>
           <div className="about-paras">
             <p className="about-para">
-              Je suis étudiant en informatique, passionné par la création d'expériences numériques qui
-              mêlent technique rigoureuse et sensibilité artistique. Je crois que le meilleur code
-              est celui qu'on ne voit pas, mais qu'on ressent.
+              Etudiant en informatique, passionné par le développement qui mélange technique rigoureuse
+              remise en question. Le code est en quelque sorte <span className='about-para-accent'>une partie de nous</span>.
             </p>
             <p className="about-para">
               Mon approche : comprendre avant de coder. Concevoir avant de construire.
-              Et toujours chercher la couche cachée sous ce qu'on nous montre.
+              Chercher la moindre optimisation sans être certain.
             </p>
             <p className="about-para about-hint">
-              <span className="hint-mono">// hint : certaines vérités se trouvent au bout des flèches</span>
+              <span className="hint-mono">// hint : le <span className='gold'>chemin</span> révèle les sercrets</span>
             </p>
           </div>
         </div>
@@ -225,10 +224,12 @@ export default function About() {
               ))}
             </div>
             <div className="tunic-message">
+                <span className="gradient-text-gold">Tunic</span>
               <p className="tunic-msg-text">
                 « Dans les ruines oubliées, le renard avance sans guide.<br />
-                Il apprend la langue du monde en observant ses formes.<br />
-                <span className="gradient-text-gold">Tunic</span> — le jeu qui m'a appris que ne pas comprendre,<br />
+                Il apprend la langue du monde en apprenant les glyphes.<br />
+                <br />
+                 Le jeu qui m'a appris que ne pas comprendre,<br />
                 c'est déjà commencer à chercher. »
               </p>
               <span className="tunic-credit">— jeu favori de tous les temps</span>
@@ -241,7 +242,7 @@ export default function About() {
       <section className="interests-section">
         <div className="section-header">
           <span className="section-tag">INTÉRÊTS</span>
-          <h2 className="section-title">Ce qui m'anime</h2>
+          <h2 className="section-title">Ce que j'aime particulièrement</h2>
         </div>
         <div className="interests-grid">
           {interests.map(item => (
@@ -263,10 +264,10 @@ export default function About() {
         </div>
         <div className="timeline">
           {[
-            { year: '2024', title: 'Projets personnels avancés', desc: 'APIs, motion design, systèmes complexes.' },
-            { year: '2023', title: 'Premières contributions open-source', desc: 'Découverte de l\'écosystème dev.' },
-            { year: '2022', title: 'Licence Informatique', desc: 'Algorithmes, réseaux, bases de données.' },
-            { year: '2021', title: 'Premier projet React', desc: 'Le début de l\'obsession frontend.' },
+            { year: '2025', title: 'Dev confirmé', desc: 'Apprentissage de Rust et du web moderne et retour sur Unity !' },
+            { year: '2024', title: 'Entrée en matière (89)', desc: 'Apprentissage du C et du web basique.' },
+            { year: '2023', title: 'Passage sur Unity', desc: 'Découverte de ce qu\'est un moteur de jeu avec CoolMounatin.' },
+            { year: '2022', title: 'Apprentissage Python', desc: 'Le début de l\'ascencion.' },
           ].map((item, i) => (
             <div key={i} className="timeline-item">
               <div className="timeline-year">{item.year}</div>

@@ -167,7 +167,7 @@ export default function Home() {
         <div className="hero-content hero-title-wrap">
           <div className="hero-tag">
             <span className="hero-tag-dot" />
-            <span>Available for opportunities</span>
+            <span>Available NOW</span>
           </div>
 
           <h1 className="hero-title">
@@ -182,8 +182,8 @@ export default function Home() {
           </h1>
 
           <div className="hero-badges">
-            {['React', 'TypeScript', 'Node.js', 'Python', 'GSAP'].map(b => (
-              <span key={b} className="hero-badge">{b}</span>
+            {['React', 'TypeScript', 'Luau', 'Rust', 'C#'].map(b => (
+              <span key={b} className="hero-badge glow">{b}</span>
             ))}
           </div>
 
@@ -209,7 +209,7 @@ export default function Home() {
 
         <div className="hero-scroll-hint">
           <div className="scroll-line" />
-          <span>SCROLL</span>
+          <span className='glow'>SCROLL</span>
         </div>
       </section>
 
@@ -219,8 +219,8 @@ export default function Home() {
           {[
             { num: '10+', label: 'Projets réalisés' },
             { num: '3+', label: 'Années d\'expérience' },
-            { num: '∞', label: 'Passion pour le code' },
-            { num: '01', label: 'Objectif : vous impressionner' },
+            { num: '∞', label: 'Intérêt pour le code' },
+            { num: '🦊', label: "01010100 01010101 01001110 01001001 01000011" },
           ].map(s => (
             <div key={s.label} className="stat-item">
               <div className="stat-num gradient-text">{s.num}</div>
@@ -238,10 +238,10 @@ export default function Home() {
         </div>
         <div className="skills-grid">
           {[
-            { name: 'Frontend', techs: ['React', 'TypeScript', 'Next.js', 'GSAP', 'Three.js'], icon: '⬡' },
+            { name: 'Frontend', techs: ['React', 'TypeScript', 'Axios', 'GSAP'], icon: '⬡' },
             { name: 'Backend', techs: ['Node.js', 'Express', 'Python', 'FastAPI', 'PostgreSQL'], icon: '⬡' },
-            { name: 'DevOps', techs: ['Docker', 'Git', 'Linux', 'CI/CD', 'Nginx'], icon: '⬡' },
-            { name: 'Design', techs: ['Figma', 'Motion Design', 'UI/UX', 'SVG', 'CSS Art'], icon: '⬡' },
+            { name: 'Roblox Studio', techs: ['Studio', 'Luau', 'TypeScript', 'Rojo', 'Wally'], icon: '⬡' },
+            { name: 'Unity', techs: ['C#', 'Git', 'Piskel', 'Blender', 'FL Studio'], icon: '⬡' },
           ].map(cat => (
             <div key={cat.name} className="skill-card">
               <div className="skill-card-header">

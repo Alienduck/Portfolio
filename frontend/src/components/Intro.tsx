@@ -104,7 +104,7 @@ export default function Intro({ onComplete }: IntroProps) {
         <div className="intro-sub">
           <span className="intro-sub-line">
             <span className="intro-sub-mono">_</span>
-            ÉTUDIANT DÉVELOPPEUR
+            WEB & GAME DEVELOPER
             <span className="intro-sub-mono">_</span>
           </span>
         </div>
@@ -115,7 +115,7 @@ export default function Intro({ onComplete }: IntroProps) {
       </div>
 
       <div className="intro-corner intro-corner-tl">00</div>
-      <div className="intro-corner intro-corner-tr">2025</div>
+      <div className="intro-corner intro-corner-tr">2026</div>
     </div>
   )
 }
