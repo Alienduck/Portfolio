@@ -29,7 +29,7 @@ export default function Nav() {
 
   return (
     <nav ref={navRef} className={scrolled ? 'scrolled' : ''}>
-      <Link to="/" className="nav-logo">DEV.PORT</Link>
+      <Link to="/" className="nav-logo">ALIENDUCK</Link>
       <ul className="nav-links">
         <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
         <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link></li>

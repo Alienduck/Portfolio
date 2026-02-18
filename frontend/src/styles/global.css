@@ -31,7 +31,7 @@ body {
   color: var(--text);
   font-family: "Syne", sans-serif;
   overflow-x: hidden;
-  cursor: none;
+  cursor: none !important;
 }
 
 body.loading {
@@ -210,4 +210,27 @@ section {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.gold {
+  color: var(--gold);
+}
+
+.glow {
+  color: var(--text);
+  animation: glow 4s ease-in-out infinite;
+}
+
+@keyframes glowing {
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px var(--text),
+      0 0 20px var(--text);
+  }
+  50% {
+    text-shadow:
+      0 0 30px var(--text),
+      0 0 40px var(--text);
+  }
 }

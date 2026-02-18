@@ -43,6 +43,29 @@
   color: var(--text-muted);
 }
 
+.about-para-accent {
+  color: var(--blue);
+  font-weight: 500;
+  text-shadow:
+    0 0 10px var(--blue-bright),
+    0 0 20px var(--blue-bright);
+  animation: about-para-accent 4s ease-in-out infinite;
+}
+
+@keyframes about-para-accent {
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px var(--blue-bright),
+      0 0 20px var(--blue-bright);
+  }
+  50% {
+    text-shadow:
+      0 0 20px var(--blue-bright),
+      0 0 40px var(--blue-bright);
+  }
+}
+
 .about-hint {
   margin-top: 0.5rem;
 }
@@ -242,6 +265,7 @@
 
 .tunic-msg-text {
   font-size: 1.05rem;
+  color: #eee !important;
   line-height: 1.8;
   color: var(--text-muted);
   font-style: italic;
