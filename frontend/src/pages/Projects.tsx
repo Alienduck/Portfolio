@@ -86,12 +86,18 @@ export default function Projects() {
   }, [])
 
   useEffect(() => {
+    ScrollTrigger.refresh();
     gsap.from('.project-card', {
-      opacity: 0,
-      y: 40,
-      duration: 0.5,
-      stagger: 0.06,
-      ease: 'power2.out',
+      y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out',
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: '.projects-grid',
+          start: 'top 80%',
+        }
     })
   }, [filter])
 
