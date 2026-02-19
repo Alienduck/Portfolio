@@ -79,7 +79,6 @@ export default function AmbientBackground() {
           pointerEvents: 'none',
         }}
       >
-        {/* Point de départ (Cercle rempli) */}
         <circle
           cx="100"
           cy="150"
