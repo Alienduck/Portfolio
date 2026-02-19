@@ -60,5 +60,47 @@ export default function AmbientBackground() {
     }
   }, [])
 
-  return <canvas ref={canvasRef} id="ambient-canvas" />
+  return (
+    <>
+      <canvas ref={canvasRef} id="ambient-canvas" />
+      {/* Tunic Golden Path (Holy Cross) */}
+      <svg
+        viewBox="0 0 200 200"
+        style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '35vw',
+          minWidth: '300px',
+          height: 'auto',
+          opacity: 0.03,
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        <circle
+          cx="100"
+          cy="150"
+          r="6"
+          fill="#f4b942"
+          style={{
+            filter: 'drop-shadow(0 0 10px rgba(244, 185, 66, 0.6))'
+          }}
+        />
+
+        <path
+          d="M 100 150 L 100 100 L 10 100 L 10 50 L 150 50 L 150 100 L 200 100"
+          fill="none"
+          stroke="#f4b942"
+          strokeWidth="6"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          style={{
+            filter: 'drop-shadow(0 0 10px rgba(244, 185, 66, 0.5))'
+          }}
+        />
+      </svg>
+    </>
+  )
 }

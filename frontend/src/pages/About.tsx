@@ -2,13 +2,14 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '../styles/About.css'
+import secretSound from '../assets/secret.wav'
 
 gsap.registerPlugin(ScrollTrigger)
 
 // Tunic-inspired sacred cross / konami-style easter egg
-// The Tunic fox explores ruins and discovers a language. The sacred cross is an icon.
-// Sequence: ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight
 const TUNIC_SEQUENCE = ['ArrowUp', 'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowRight']
+const UNLOCK_SOUND = new Audio(secretSound);
+UNLOCK_SOUND.volume = 0.4; 
 
 export default function About() {
   const [tunicUnlocked, setTunicUnlocked] = useState(false)
@@ -17,8 +18,6 @@ export default function About() {
   const crossRef = useRef<SVGSVGElement>(null)
   const pageRef = useRef<HTMLElement>(null)
 
-  // Hidden golden pattern - Tunic sacred cross SVG
-  // It glows subtly when hovered, and reacts to arrow keys
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) return
     e.preventDefault()
@@ -38,6 +37,15 @@ export default function About() {
     }
 
     if (buf.join(',') === TUNIC_SEQUENCE.join(',')) {
+      UNLOCK_SOUND.currentTime = 0
+      const playPromise = UNLOCK_SOUND.play()
+
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.warn("The audio still locked, click somewhere else to try again", error)
+        })
+      }
+
       setTunicUnlocked(true)
       keyBuffer.current = []
     }
@@ -51,7 +59,6 @@ export default function About() {
   useEffect(() => {
     if (!tunicUnlocked || !crossRef.current) return
 
-    // Animate the sacred cross reveal
     const tl = gsap.timeline()
     tl.to(crossRef.current, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' })
       .to('.tunic-glyph', {
@@ -122,7 +129,7 @@ export default function About() {
       highlight: false,
     },
     {
-      icon: '🌿',
+      icon: '🥊',
       title: 'Boxe',
       desc: 'Un peu de sport n\'a jamais tué qui que ce soit.',
       highlight: true,
