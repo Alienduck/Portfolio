@@ -262,7 +262,7 @@ export default function Home() {
         <div className="home-cta-content">
           <p className="home-cta-label">PRÊT À COLLABORER ?</p>
           <h2>Travaillons <span className="gradient-text">ensemble</span></h2>
-          <a href="mailto:contact@example.com" className="btn-primary btn-large">
+          <a href="mailto:oneuillyr@gmail.com" className="btn-primary btn-large">
             <span>Me contacter</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
