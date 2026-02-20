@@ -219,8 +219,8 @@ section {
   /* Définit une ligne de 50px suivie d'un espace vide immense */
   stroke-dasharray: 1 1000;
   stroke-dashoffset: 1000;
-  animation: travel 4s linear infinite;
-  stroke-opacity: 0.6;
+  animation: travel 6s linear infinite;
+  stroke-opacity: 0.05;
 }
 
 @keyframes travel {
