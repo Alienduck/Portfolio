@@ -163,7 +163,7 @@ export default function Projects() {
               <div className="project-card-footer">
                 <div className="project-tags">
                   {project.tags.map(t => (
-                    <span key={t} className="project-tag">{t}</span>
+                    <span key={t} className="project-tag glow">{t}</span>
                   ))}
                 </div>
               </div>
