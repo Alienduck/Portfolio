@@ -221,7 +221,7 @@ export default function About() {
               <circle cx="42" cy="38" r="4" fill="url(#goldGrad)" />
               <circle cx="58" cy="38" r="4" fill="url(#goldGrad)" />
               <circle cx="42" cy="54" r="4" fill="url(#goldGrad)" />
-              <circle cx="58" cy="54" r="4" fill="url(#goldGrad)" />
+              <circle cx="58" cy="54" r="4" fill="url(#goldGrad)"/>
               <polygon points="50,44 56,50 50,56 44,50" fill="#fcd34d" />
               <defs>
                 <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
