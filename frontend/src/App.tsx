@@ -32,12 +32,12 @@ function AppContent() {
     const onMove = (e: MouseEvent) => {
       mouseX = e.clientX
       mouseY = e.clientY
-      gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.05 })
+      gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.01 })
     }
 
     const animate = () => {
-      ringX += (mouseX - ringX) * 0.12
-      ringY += (mouseY - ringY) * 0.12
+      ringX += (mouseX - ringX) * 0.5
+      ringY += (mouseY - ringY) * 0.5
       gsap.set(ring, { x: ringX, y: ringY })
       requestAnimationFrame(animate)
     }
