@@ -249,7 +249,7 @@ export default function Home() {
                 <h3>{cat.name}</h3>
               </div>
               <div className="skill-tags">
-                {cat.techs.map(t => <span key={t} className="skill-tag">{t}</span>)}
+                {cat.techs.map(t => <span key={t} className="skill-tag glow">{t}</span>)}
               </div>
               <div className="skill-card-glow" />
             </div>
