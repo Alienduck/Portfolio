@@ -29,6 +29,7 @@
 .projects-filters {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .filter-btn {
@@ -85,7 +86,7 @@
 .project-card:hover {
   transform: translateY(-5px);
   background: var(--bg-2);
-  transition: transform 0.3 cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .project-card-top {
@@ -140,6 +141,7 @@
   transition:
     color 0.2s,
     transform 0.3s;
+  flex-shrink: 0;
 }
 
 .project-card:hover .project-icon {
@@ -270,4 +272,121 @@
 .github-cta-inner .btn-primary {
   margin-left: auto;
   flex-shrink: 0;
+}
+
+/* ============================
+   RESPONSIVE — TABLET (≤ 1024px)
+   ============================ */
+@media (max-width: 1024px) {
+  .projects-hero {
+    padding: 4rem 5vw 2.5rem;
+  }
+
+  .projects-grid-section {
+    padding: 2rem 5vw 6rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-github-cta {
+    padding: 0 5vw 6rem;
+  }
+}
+
+/* ============================
+   RESPONSIVE — MOBILE (≤ 768px)
+   ============================ */
+@media (max-width: 768px) {
+  .projects-page {
+    padding-top: 4rem;
+  }
+
+  .projects-hero {
+    padding: 3rem 1.5rem 2rem;
+  }
+
+  .projects-header-content {
+    margin-bottom: 2rem;
+  }
+
+  .projects-subtitle {
+    max-width: 100%;
+    font-size: 0.92rem;
+  }
+
+  .filter-btn {
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    font-size: 0.6rem;
+  }
+
+  .projects-grid-section {
+    padding: 1.5rem 1.5rem 5rem;
+  }
+
+  /* 1 column on mobile */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    padding: 1.5rem;
+  }
+
+  /* Disable hover transform on touch */
+  .project-card:hover {
+    transform: none;
+  }
+
+  .project-name {
+    font-size: 1.1rem;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+  }
+
+  /* GitHub CTA — stack vertically */
+  .projects-github-cta {
+    padding: 0 1.5rem 5rem;
+  }
+
+  .github-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .github-cta-inner .btn-primary {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================
+   RESPONSIVE — SMALL MOBILE (≤ 480px)
+   ============================ */
+@media (max-width: 480px) {
+  .projects-hero,
+  .projects-grid-section,
+  .projects-github-cta {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .project-card {
+    padding: 1.2rem;
+  }
+
+  .project-name {
+    font-size: 1rem;
+  }
+
+  .project-tag {
+    font-size: 0.52rem;
+  }
 }

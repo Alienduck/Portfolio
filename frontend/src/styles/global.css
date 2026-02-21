@@ -39,7 +39,7 @@ body.loading {
   overflow: hidden;
 }
 
-/* Custom cursor */
+/* Custom cursor — hidden on touch devices */
 .cursor {
   position: fixed;
   width: 12px;
@@ -124,7 +124,9 @@ button {
   min-height: 100vh;
 }
 
-/* Nav */
+/* ============================
+   NAV
+   ============================ */
 nav {
   position: fixed;
   top: 0;
@@ -192,6 +194,14 @@ nav.scrolled {
   width: 100%;
 }
 
+.nav-links a.active {
+  color: var(--violet-bright);
+}
+
+.nav-links a.active::after {
+  width: 100%;
+}
+
 /* Sections */
 section {
   position: relative;
@@ -214,9 +224,7 @@ section {
 }
 
 /* Golden path */
-
 .path-glow {
-  /* Définit une ligne de 50px suivie d'un espace vide immense */
   stroke-dasharray: 1 1000;
   stroke-dashoffset: 1000;
   animation: travel 6s linear infinite;
@@ -236,12 +244,10 @@ section {
 @keyframes blink {
   0%,
   100% {
-    opacity: 1;
-    filter: brightness(1);
+    filter: brightness(0.1);
   }
   50% {
-    opacity: 0.5;
-    filter: brightness(1.5);
+    filter: brightness(0.05);
   }
 }
 
@@ -271,5 +277,79 @@ section {
     text-shadow:
       0 0 30px currentColor,
       0 0 40px currentColor;
+  }
+}
+
+/* ============================
+   RESPONSIVE — TABLET (≤ 1024px)
+   ============================ */
+@media (max-width: 1024px) {
+  nav {
+    padding: 1.2rem 2rem;
+  }
+
+  .nav-links {
+    gap: 2rem;
+  }
+}
+
+/* ============================
+   RESPONSIVE — MOBILE (≤ 768px)
+   ============================ */
+@media (max-width: 768px) {
+  /* Hide custom cursor on touch */
+  .cursor,
+  .cursor-ring {
+    display: none !important;
+  }
+
+  /* Reset cursor for touch */
+  *,
+  *::before,
+  *::after {
+    cursor: auto !important;
+  }
+
+  button {
+    cursor: pointer !important;
+  }
+
+  a {
+    cursor: pointer !important;
+  }
+
+  /* Nav mobile */
+  nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-logo {
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    gap: 1.2rem;
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* ============================
+   RESPONSIVE — SMALL MOBILE (≤ 480px)
+   ============================ */
+@media (max-width: 480px) {
+  nav {
+    padding: 0.9rem 1rem;
+  }
+
+  .nav-links {
+    gap: 0.8rem;
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
   }
 }
