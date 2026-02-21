@@ -141,6 +141,8 @@
 .about-photo-code {
   position: relative;
   z-index: 1;
+  width: 100%;
+  overflow-x: auto;
 }
 
 .about-photo-code pre {
@@ -323,12 +325,6 @@
 
 /* ============================================================
    DOOM SCROLL TIMELINE
-   ============================================================
-   Structure:
-   - .tl-scroller  → tall div that creates scroll space
-   - .tl-pinned    → pinned by GSAP to stay in viewport
-   - .tl-stage     → 3D perspective container for cards
-   - .tl-card      → each card, stacked absolutely, z-animated
    ============================================================ */
 
 .timeline-section {
@@ -339,13 +335,10 @@
   padding: 6rem 8vw 3rem;
 }
 
-/* The scrollable space — GSAP pins .tl-pinned inside it */
 .tl-scroller {
-  /* Height is set dynamically but needs to be at least this tall */
   position: relative;
 }
 
-/* The viewport that gets pinned */
 .tl-pinned {
   width: 100%;
   height: 100vh;
@@ -369,7 +362,6 @@
   z-index: 0;
 }
 
-/* Horizon glow line */
 .tl-horizon {
   position: absolute;
   top: 50%;
@@ -389,7 +381,6 @@
     0 0 80px 30px rgba(96, 165, 250, 0.08);
 }
 
-/* Converging side rails */
 .tl-rail {
   position: absolute;
   top: 0;
@@ -415,7 +406,6 @@
   );
 }
 
-/* Perspective floor grid */
 .tl-grid-floor {
   position: absolute;
   bottom: 0;
@@ -435,7 +425,6 @@
   transform-origin: bottom center;
 }
 
-/* Radial vignette */
 .tl-vignette {
   position: absolute;
   inset: 0;
@@ -446,7 +435,6 @@
   );
 }
 
-/* Scan line */
 .tl-scanline {
   position: absolute;
   left: 0;
@@ -508,7 +496,6 @@
   position: relative;
   z-index: 5;
   width: min(680px, 84vw);
-  /* Explicit height so absolutely positioned cards have a reference */
   height: 360px;
   perspective: 1000px;
   perspective-origin: 50% 50%;
@@ -525,7 +512,6 @@
   will-change: transform, opacity;
 }
 
-/* Remove the first-child override since all are absolute */
 .tl-card:first-child {
   position: absolute;
 }
@@ -544,7 +530,6 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-/* Glowing top line using card color */
 .tl-card-inner::before {
   content: "";
   position: absolute;
@@ -562,7 +547,6 @@
   box-shadow: 0 0 24px 3px var(--card-color, rgba(124, 58, 237, 0.8));
 }
 
-/* Corner glow */
 .tl-card-inner::after {
   content: "";
   position: absolute;
@@ -578,7 +562,6 @@
   pointer-events: none;
 }
 
-/* Micro grid bg */
 .tl-card-grid-bg {
   position: absolute;
   inset: 0;
@@ -589,7 +572,6 @@
   pointer-events: none;
 }
 
-/* Left accent bar */
 .tl-card-bar {
   position: absolute;
   left: 0;
@@ -604,7 +586,6 @@
   box-shadow: 3px 0 20px var(--card-color, rgba(124, 58, 237, 0.6));
 }
 
-/* Header row: counter + year */
 .tl-card-header {
   display: flex;
   align-items: baseline;
@@ -768,4 +749,351 @@
 
 .tl-hint-sep {
   opacity: 0.3;
+}
+
+/* ===== SVG TUNIC FOOTER ===== */
+.tunic-svg-wrap {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.tunic-svg-wrap svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =====================================================
+   MOBILE LIST — visible seulement sur mobile
+   ===================================================== */
+
+.tl-mobile-list {
+  display: none;
+  flex-direction: column;
+  padding: 0 1.5rem 5rem;
+  position: relative;
+}
+
+.tl-mobile-list::before {
+  content: "";
+  position: absolute;
+  left: 2.5rem;
+  top: 0;
+  bottom: 4rem;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--violet), transparent);
+}
+
+.tl-mobile-card {
+  position: relative;
+  padding-left: 3.5rem;
+  padding-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.tl-mobile-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tl-mobile-card:nth-child(1) {
+  transition-delay: 0s;
+}
+.tl-mobile-card:nth-child(2) {
+  transition-delay: 0.12s;
+}
+.tl-mobile-card:nth-child(3) {
+  transition-delay: 0.24s;
+}
+.tl-mobile-card:nth-child(4) {
+  transition-delay: 0.36s;
+}
+
+.tl-mobile-dot {
+  position: absolute;
+  left: calc(1.5rem - 4px);
+  top: 1.6rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--card-color, var(--violet-bright));
+  box-shadow: 0 0 14px var(--card-color, var(--violet));
+  z-index: 2;
+}
+
+.tl-mobile-connector {
+  position: absolute;
+  left: 2.5rem;
+  top: calc(1.6rem + 10px);
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--card-color, rgba(124, 58, 237, 0.5)),
+    transparent
+  );
+}
+
+.tl-mobile-card-inner {
+  position: relative;
+  padding: 1.4rem 1.2rem 1.4rem 1.4rem;
+  background: rgba(6, 6, 14, 0.95);
+  border: 1px solid rgba(124, 58, 237, 0.12);
+  border-left: 3px solid var(--card-color, var(--violet));
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.tl-mobile-card-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.tl-mobile-card-bar {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--card-color, var(--violet-bright)),
+    transparent
+  );
+  box-shadow: 0 0 10px 2px var(--card-color, rgba(124, 58, 237, 0.4));
+}
+
+.tl-mobile-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.tl-mobile-year {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.2rem;
+  line-height: 1;
+  background: var(--card-gradient, linear-gradient(135deg, #a78bfa, #60a5fa));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.85;
+}
+
+.tl-mobile-num {
+  font-family: "Space Mono", monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  color: var(--card-color, var(--violet-bright));
+  opacity: 0.7;
+}
+
+.tl-mobile-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 0.55rem;
+}
+
+.tl-mobile-desc {
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+.tl-mobile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tl-mobile-tag {
+  font-family: "Space Mono", monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  padding: 0.22rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Desktop : liste mobile cachée, doom-scroll visible */
+.tl-desktop-only {
+  display: block;
+}
+
+/* ============================
+   RESPONSIVE — TABLET (≤ 1024px)
+   ============================ */
+@media (max-width: 1024px) {
+  .about-hero {
+    gap: 2.5rem;
+    padding: 4rem 5vw 5rem;
+    min-height: auto;
+  }
+
+  .about-photo-wrap {
+    width: 300px;
+  }
+
+  .interests-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tl-stage {
+    width: min(580px, 80vw);
+    height: 380px;
+  }
+
+  .tl-card-inner {
+    padding: 2rem 2.5rem;
+  }
+
+  .tl-nav {
+    right: 1.5rem;
+  }
+
+  .timeline-section-header {
+    padding: 4rem 5vw 2rem;
+  }
+}
+
+/* ============================
+   RESPONSIVE — MOBILE (≤ 768px)
+   ============================ */
+@media (max-width: 768px) {
+  .about-page {
+    padding-top: 4rem;
+    overflow-x: hidden; /* évite le scroll horizontal sur toute la page */
+  }
+
+  /* Stack hero vertically */
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 3rem 1.5rem 4rem;
+    min-height: auto;
+  }
+
+  .about-paras {
+    max-width: 100%;
+  }
+
+  .about-para {
+    font-size: 0.95rem;
+  }
+
+  .about-right {
+    justify-content: flex-start;
+  }
+
+  .about-photo-wrap {
+    width: 100%;
+  }
+
+  .about-photo-inner {
+    min-height: 200px;
+    padding: 1.5rem;
+  }
+
+  .about-photo-code pre {
+    font-size: 0.68rem;
+  }
+
+  .hidden-cross-wrap {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 1rem;
+    align-items: flex-start;
+  }
+
+  /* Tunic reveal */
+  .tunic-reveal {
+    padding: 3rem 1.5rem;
+  }
+
+  .tunic-msg-text {
+    font-size: 0.9rem;
+  }
+
+  /* Interests */
+  .interests-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .interests-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── TIMELINE MOBILE : on cache le doom-scroll, on affiche la liste ── */
+  .tl-desktop-only {
+    display: none !important; /* Aucun GSAP ne s'initialise */
+  }
+
+  .tl-mobile-list {
+    display: flex; /* Affiche la liste */
+  }
+
+  .timeline-section-header {
+    padding: 3rem 1.5rem 1.5rem;
+  }
+}
+
+/* ============================
+   RESPONSIVE — SMALL MOBILE (≤ 480px)
+   ============================ */
+@media (max-width: 480px) {
+  .about-hero {
+    padding: 2.5rem 1rem 3rem;
+  }
+
+  .interests-section,
+  .tunic-reveal {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .interest-card {
+    padding: 1.5rem;
+  }
+
+  .tl-mobile-list {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .tl-mobile-card {
+    padding-left: 2.8rem;
+  }
+
+  .tl-mobile-year {
+    font-size: 1.8rem;
+  }
+
+  .tl-mobile-title {
+    font-size: 1.3rem;
+  }
+
+  .tl-mobile-desc {
+    font-size: 0.8rem;
+  }
 }
