@@ -9,10 +9,11 @@ interface IntroProps {
 export default function Intro({ onComplete }: IntroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
+  const tlRef = useRef<gsap.core.Timeline | null>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ onComplete })
+      tlRef.current = gsap.timeline({ onComplete })
 
       // Initial state
       gsap.set('.intro-line', { scaleX: 0, transformOrigin: 'left center' })
@@ -23,7 +24,7 @@ export default function Intro({ onComplete }: IntroProps) {
       gsap.set('.intro-dot', { scale: 0, opacity: 0 })
       gsap.set('.intro-glitch', { opacity: 0 })
 
-      tl
+      tlRef.current
         // Lines appear
         .to('.intro-line', { scaleX: 1, duration: 0.6, ease: 'expo.out', stagger: 0.1 })
         // Dots
@@ -50,6 +51,15 @@ export default function Intro({ onComplete }: IntroProps) {
         .to(containerRef.current, { opacity: 0, duration: 0.5, ease: 'power2.in' }, '+=0.3')
 
     }, containerRef)
+
+    const handleSkip = (_e: KeyboardEvent | MouseEvent) => {
+      if (tlRef.current) {
+        tlRef.current.progress(1); 
+      }
+    };
+
+    window.addEventListener('keydown', handleSkip);
+    window.addEventListener('click', handleSkip);
 
     return () => ctx.revert()
   }, [onComplete])
@@ -116,6 +126,7 @@ export default function Intro({ onComplete }: IntroProps) {
 
       <div className="intro-corner intro-corner-tl">00</div>
       <div className="intro-corner intro-corner-tr">2026</div>
+      <div className="intro-skip">Skip Intro by interact</div>
     </div>
   )
 }
