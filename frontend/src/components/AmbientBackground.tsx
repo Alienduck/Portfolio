@@ -108,6 +108,7 @@ export default function AmbientBackground() {
           strokeLinecap="round"
           filter="url(#glow)"
         />
+        <circle cx="100" cy="150" r="6" fill="#f4b942" style={{ filter: "brightness(0.1)"}} />
       </svg>
     </>
   )
