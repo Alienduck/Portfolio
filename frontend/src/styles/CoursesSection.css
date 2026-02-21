@@ -1,0 +1,335 @@
+/* =====================================================
+   COURSES SECTION
+   ===================================================== */
+
+.courses-section {
+  padding: 8rem 8vw;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+
+.courses-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 400px;
+  background: radial-gradient(
+    ellipse at center top,
+    rgba(124, 58, 237, 0.08),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ── Header ── */
+.courses-section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.courses-section-sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 1.2rem auto 0;
+  line-height: 1.7;
+}
+
+/* ── Carousel Wrapper ── */
+.courses-carousel-wrap {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  user-select: none;
+}
+
+/* ── Slide Track ── */
+.courses-track {
+  position: relative;
+  min-height: 260px;
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  border-top: 1px solid var(--slide-color, rgba(124, 58, 237, 0.4));
+  background: rgba(6, 6, 14, 0.95);
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: grab;
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.06),
+    0 24px 60px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.5s ease;
+}
+
+.courses-track:active {
+  cursor: grabbing;
+}
+
+/* decorative grid bg */
+.courses-track::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.courses-slide-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: background 0.6s ease;
+}
+
+.courses-slide-line {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  transition: background 0.5s ease;
+  box-shadow: 0 0 12px 2px currentColor;
+}
+
+/* ── Slide Inner ── */
+.courses-slide-inner {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.courses-slide-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+.courses-slide-tag {
+  font-family: "Space Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: color 0.4s;
+}
+
+.courses-slide-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: var(--text);
+}
+
+.courses-slide-body {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.courses-slide-body strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ── Dots ── */
+.courses-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.courses-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.2);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.courses-dot.active {
+  background: var(--dot-color, var(--violet-bright));
+  border-color: var(--dot-color, var(--violet-bright));
+  box-shadow: 0 0 10px var(--dot-color, var(--violet));
+  transform: scale(1.6);
+}
+
+/* ── Arrows ── */
+.courses-arrow {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(6, 6, 14, 0.9);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.courses-arrow:hover {
+  border-color: var(--violet-bright);
+  color: var(--violet-bright);
+  box-shadow: 0 0 14px rgba(167, 139, 250, 0.3);
+}
+
+/* Desktop arrows: absolute flanking the card */
+.courses-arrow-desktop {
+  position: absolute;
+  top: 50%;
+  transform: translateY(calc(-50% - 20px));
+}
+
+.courses-arrow-prev.courses-arrow-desktop {
+  left: -52px;
+}
+.courses-arrow-next.courses-arrow-desktop {
+  right: -52px;
+}
+
+/* Mobile arrows: shown inline in nav-row */
+.courses-arrow-mobile {
+  display: none;
+}
+
+/* ── Nav row (dots + mobile arrows) ── */
+.courses-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* ── Counter ── */
+.courses-counter {
+  position: absolute;
+  bottom: -2rem;
+  right: 0;
+  font-family: "Space Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: rgba(124, 58, 237, 0.4);
+}
+
+.courses-counter-cur {
+  color: var(--violet-bright);
+}
+
+/* ── CTA below carousel ── */
+.courses-join-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.courses-cta-note {
+  font-family: "Space Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+/* ============================
+   RESPONSIVE — TABLET (≤ 1024px)
+   ============================ */
+@media (max-width: 1024px) {
+  .courses-section {
+    padding: 6rem 5vw;
+  }
+
+  .courses-carousel-wrap {
+    max-width: 560px;
+  }
+
+  .courses-arrow-prev {
+    left: -42px;
+  }
+  .courses-arrow-next {
+    right: -42px;
+  }
+}
+
+/* ============================
+   RESPONSIVE — MOBILE (≤ 768px)
+   ============================ */
+@media (max-width: 768px) {
+  .courses-section {
+    padding: 5rem 1.5rem;
+  }
+
+  .courses-section-sub {
+    font-size: 0.9rem;
+  }
+
+  .courses-carousel-wrap {
+    max-width: 100%;
+  }
+
+  /* Desktop arrows hidden on mobile */
+  .courses-arrow-desktop {
+    display: none;
+  }
+
+  /* Mobile arrows shown inline */
+  .courses-arrow-mobile {
+    display: flex;
+  }
+
+  .courses-nav-row {
+    margin-top: 1.2rem;
+  }
+
+  .courses-slide-inner {
+    padding: 1.8rem 1.5rem;
+  }
+
+  .courses-slide-body {
+    font-size: 0.88rem;
+  }
+
+  .courses-counter {
+    position: static;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  .courses-join-cta {
+    margin-top: 3.5rem;
+  }
+
+  .courses-join-cta .btn-large {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================
+   RESPONSIVE — SMALL MOBILE (≤ 480px)
+   ============================ */
+@media (max-width: 480px) {
+  .courses-section {
+    padding: 4rem 1rem;
+  }
+
+  .courses-slide-title {
+    font-size: 1.6rem;
+  }
+}
