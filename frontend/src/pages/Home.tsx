@@ -1,20 +1,234 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '../styles/Home.css'
+import '../styles/CoursesSection.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// ─── COURSES CAROUSEL DATA ────────────────────────────────────────────────────
+
+const SLIDES = [
+  {
+    type: 'intro',
+    tag: 'CONCEPT',
+    title: 'Comment ça marche ?',
+    body: "Les cours sont divisés en deux types de fiches : les **Prémices** pour comprendre les concepts en profondeur, et les **Projects** pour mettre les mains dans le code. Chacun avance à son propre rythme, sans notes, sans pression.",
+    icon: '📖',
+    color: '#a78bfa',
+  },
+  {
+    type: 'premices',
+    tag: 'PRÉMICES',
+    title: 'Théorie & Concepts',
+    body: "Des fiches explicatives rédigées en Markdown (Obsidian), détaillées et facilement lisibles. Parfaites pour apprendre un concept, se remémorer une notion ou chercher une info rapidement.",
+    icon: '🧠',
+    color: '#60a5fa',
+  },
+  {
+    type: 'projects',
+    tag: 'PROJECTS',
+    title: 'Pratique & Code',
+    body: "Des projets concrets à développer — simples au début, progressivement plus ambitieux. Certains projets servent de base pour les suivants. Des conseils sont fournis pour ne jamais rester bloqué.",
+    icon: '⚙️',
+    color: '#6366f1',
+  },
+  {
+    type: 'ambiance',
+    tag: 'AMBIANCE',
+    title: 'Cours à la carte',
+    body: "Pas de notes, pas de stress. Tu peux me poser des questions et m'envoyer ton code quand tu veux. Chaque élève adapte les cours à sa façon d'apprendre.",
+    icon: '🎯',
+    color: '#34d399',
+  },
+  {
+    type: 'tarifs',
+    tag: 'TARIFS',
+    title: 'Accès illimité aux fiches',
+    body: "**30€ / mois** ou **15€ / 2 semaines**. Une fois inscrit, tu gardes l'accès aux fiches à vie — même après la fin des cours.",
+    icon: '💎',
+    color: '#f4b942',
+  },
+]
+
+function CoursesSection() {
+  const [active, setActive] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const dragStartX = useRef(0)
+  const dragDeltaX = useRef(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const timerRef = useRef<number>(null)
+
+  // Auto-advance
+  useEffect(() => {
+    if (isDragging) return
+    timerRef.current = setInterval(() => setActive(a => (a + 1) % SLIDES.length), 15000)
+    return () => clearInterval(timerRef.current as number)
+  }, [isDragging])
+
+  // GSAP slide animation
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.courses-slide-inner', {
+        opacity: 0,
+        y: 24,
+        duration: 0.45,
+        ease: 'power2.out',
+      })
+    }, trackRef)
+    return () => ctx.revert()
+  }, [active])
+
+  // Entry animation
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.courses-section-header', { opacity: 0, y: 40, duration: 0.7, ease: 'power2.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 85%', once: true }
+      })
+      gsap.from('.courses-carousel-wrap', { opacity: 0, y: 50, duration: 0.8, delay: 0.2, ease: 'power2.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true }
+      })
+      gsap.from('.courses-join-cta', { opacity: 0, y: 30, duration: 0.7, delay: 0.4, ease: 'power2.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', once: true }
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+  // Touch/mouse drag
+  const onDragStart = (clientX: number) => {
+    setIsDragging(true)
+    dragStartX.current = clientX
+    dragDeltaX.current = 0
+  }
+  const onDragMove = (clientX: number) => {
+    if (!isDragging) return
+    dragDeltaX.current = clientX - dragStartX.current
+  }
+  const onDragEnd = () => {
+    if (!isDragging) return
+    setIsDragging(false)
+    const delta = dragDeltaX.current
+    if (Math.abs(delta) > 50) {
+      clearInterval(timerRef.current as number)
+      if (delta < 0) setActive(a => (a + 1) % SLIDES.length)
+      else setActive(a => (a - 1 + SLIDES.length) % SLIDES.length)
+    }
+    dragDeltaX.current = 0
+  }
+
+  const slide = SLIDES[active]
+
+  return (
+    <section ref={sectionRef} className="courses-section">
+      {/* Header */}
+      <div className="courses-section-header">
+        <span className="section-tag">ROBLOX STUDIO</span>
+        <h2 className="section-title">
+          Rejoignez nos <span className="gradient-text">futurs devs</span>
+        </h2>
+        <p className="courses-section-sub">
+          J'enseigne le scripting Luau sur Roblox Studio — de zéro à des projets ambitieux. Les cours s'adaptent à chacun.
+        </p>
+      </div>
+
+      {/* Carousel */}
+      <div className="courses-carousel-wrap">
+        {/* Slide track */}
+        <div
+          ref={trackRef}
+          className="courses-track"
+          onMouseDown={e => onDragStart(e.clientX)}
+          onMouseMove={e => onDragMove(e.clientX)}
+          onMouseUp={onDragEnd}
+          onMouseLeave={onDragEnd}
+          onTouchStart={e => onDragStart(e.touches[0].clientX)}
+          onTouchMove={e => onDragMove(e.touches[0].clientX)}
+          onTouchEnd={onDragEnd}
+          style={{ '--slide-color': slide.color } as React.CSSProperties}
+        >
+          <div className="courses-slide-inner">
+            <div className="courses-slide-icon">{slide.icon}</div>
+            <span className="courses-slide-tag" style={{ color: slide.color }}>{slide.tag}</span>
+            <h3 className="courses-slide-title">{slide.title}</h3>
+            <p className="courses-slide-body" dangerouslySetInnerHTML={{ __html: slide.body.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') }} />
+          </div>
+
+          {/* Decorative glow */}
+          <div className="courses-slide-glow" style={{ background: `radial-gradient(circle at 80% 20%, ${slide.color}22, transparent 60%)` }} />
+          <div className="courses-slide-line" style={{ background: `linear-gradient(90deg, transparent, ${slide.color}, transparent)` }} />
+        </div>
+
+        {/* Desktop arrows (absolute) */}
+        <button className="courses-arrow courses-arrow-prev courses-arrow-desktop" onClick={() => setActive(a => (a - 1 + SLIDES.length) % SLIDES.length)} aria-label="Précédent">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M9 2L4 7l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        <button className="courses-arrow courses-arrow-next courses-arrow-desktop" onClick={() => setActive(a => (a + 1) % SLIDES.length)} aria-label="Suivant">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M5 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+
+        {/* Dots + mobile arrows row */}
+        <div className="courses-nav-row">
+          <button className="courses-arrow courses-arrow-mobile" onClick={() => setActive(a => (a - 1 + SLIDES.length) % SLIDES.length)} aria-label="Précédent">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <div className="courses-dots">
+            {SLIDES.map((s, i) => (
+              <button
+                key={i}
+                className={`courses-dot ${i === active ? 'active' : ''}`}
+                onClick={() => setActive(i)}
+                style={{ '--dot-color': s.color } as React.CSSProperties}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
+          </div>
+          <button className="courses-arrow courses-arrow-mobile" onClick={() => setActive(a => (a + 1) % SLIDES.length)} aria-label="Suivant">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M5 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Counter */}
+        <div className="courses-counter">
+          <span className="courses-counter-cur">{String(active + 1).padStart(2, '0')}</span>
+          <span className="courses-counter-sep"> / </span>
+          <span className="courses-counter-tot">{String(SLIDES.length).padStart(2, '0')}</span>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="courses-join-cta">
+        <a href="mailto:oneuillyr@gmail.com" className="btn-primary btn-large">
+          <span>Rejoindre les cours</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+        <p className="courses-cta-note">30€ / mois · 15€ / 2 semaines · Fiches à vie 🎓</p>
+      </div>
+    </section>
+  )
+}
+
+// ─── MAIN HOME ────────────────────────────────────────────────────────────────
+
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null)
-//   const titleRef = useRef<HTMLDivElement>(null)
   const orbRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Entry animation
       gsap.set('.hero-tag', { opacity: 0, x: -30 })
       gsap.set('.hero-title-line', { clipPath: 'inset(0 100% 0 0)' })
       gsap.set('.hero-cta', { opacity: 0, y: 20 })
@@ -36,7 +250,6 @@ export default function Home() {
         .to('.floating-chip', { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power2.out' }, '-=0.3')
         .to('.hero-scroll-hint', { opacity: 1, duration: 0.5 }, '-=0.1')
 
-      // SVG path animations
       if (svgRef.current) {
         const paths = svgRef.current.querySelectorAll('.svg-path')
         paths.forEach((path) => {
@@ -54,7 +267,6 @@ export default function Home() {
         })
       }
 
-      // Orb floating
       gsap.to(orbRef.current, {
         y: '-=30',
         duration: 3,
@@ -63,7 +275,6 @@ export default function Home() {
         repeat: -1,
       })
 
-      // Parallax on scroll
       gsap.to('.hero-orb-wrap', {
         y: 200,
         ease: 'none',
@@ -87,7 +298,6 @@ export default function Home() {
         }
       })
 
-      // Floating chips orbit
       const chips = document.querySelectorAll('.floating-chip')
       chips.forEach((chip, i) => {
         gsap.to(chip, {
@@ -100,7 +310,6 @@ export default function Home() {
         })
       })
 
-      // Stats section entrance
       gsap.from('.stat-item', {
         y: 60,
         opacity: 0,
@@ -113,7 +322,6 @@ export default function Home() {
         }
       })
 
-      // Skills entrance
       gsap.from('.skill-card', {
         y: 80,
         opacity: 0,
@@ -128,7 +336,6 @@ export default function Home() {
 
     }, heroRef)
 
-    // Mouse parallax
     const onMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e
       const x = (clientX / window.innerWidth - 0.5) * 30
@@ -198,7 +405,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Floating tech chips */}
         <div className="floating-chips">
           {['git', 'docker', 'linux', 'api', 'sql', 'css'].map((chip, i) => (
             <div key={chip} className="floating-chip" style={{ '--idx': i } as React.CSSProperties}>
@@ -257,19 +463,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA FOOTER */}
-      <section className="home-cta-section">
-        <div className="home-cta-content">
-          <p className="home-cta-label">PRÊT À COLLABORER ?</p>
-          <h2>Travaillons <span className="gradient-text">ensemble</span></h2>
-          <a href="mailto:oneuillyr@gmail.com" className="btn-primary btn-large">
-            <span>Me contacter</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
-        </div>
-      </section>
+      {/* COURSES SECTION */}
+      <CoursesSection />
     </main>
   )
 }
