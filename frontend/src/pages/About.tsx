@@ -172,7 +172,7 @@ export default function About() {
   }, [])
 
   const interests = [
-    { icon: '🦊', title: 'Game dev', desc: "Le développement de jeu est un processus long et parfois éprouvant, qui aboutis à des chefs d'oeuvres.", highlight: true },
+    { icon: '🦊', title: 'Game dev', desc: "Un processus long et parfois éprouvant, qui aboutis à des chefs d'oeuvres.", highlight: true },
     { icon: '⚗️', title: 'Algo', desc: "Trouver des solutions à des problèmes plus ou moins complexes et avec différentes manières.", highlight: true },
     { icon: '🎨', title: 'UI/Motion Design', desc: "Donner vie aux interfaces. Faire que chaque pixel ait l'intention d'exister.", highlight: false },
     { icon: '🔨', title: 'Architecture', desc: "Quelque chose que l'on apprend plus avec le temps et l'expérience qu'à l'école.", highlight: false },
