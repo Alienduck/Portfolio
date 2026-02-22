@@ -202,7 +202,9 @@ export default function About() {
               Chercher la moindre optimisation sans être certain.
             </p>
             <p className="about-para about-hint">
-              <span className="hint-mono">// hint : le <span className="gold">chemin</span> révèle les secrets</span>
+              <span className="hint-mono">// hint : le <button className="gold" onClick={() => {
+                gsap.set('.path-glow', { strokeOpacity: 1} )
+              }}>chemin</button> révèle les secrets</span>
             </p>
           </div>
         </div>
