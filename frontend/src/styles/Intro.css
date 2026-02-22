@@ -211,7 +211,7 @@
   font-family: "Space Mono", monospace;
   font-style: italic;
   text-shadow:
-    0 0 3px currentColr,
+    0 0 3px currentColor,
     0 0 7px currentColor;
   animation: skip 3s linear infinite;
 }
@@ -220,7 +220,7 @@
   0%,
   100% {
     text-shadow:
-      0 0 10px currentColr,
+      0 0 10px currentColor,
       0 0 20px currentColor;
     opacity: 0.25;
   }
