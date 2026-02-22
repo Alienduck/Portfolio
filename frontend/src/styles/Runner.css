@@ -1,0 +1,127 @@
+/* ===== RUNNER / WASM SECTION ===== */
+.runner-section {
+  padding: 4rem 8vw 8rem;
+  border-top: 1px solid var(--border);
+}
+
+.runner-header {
+  margin-bottom: 2.5rem;
+}
+
+.runner-subtitle {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+/* Le cadre autour du canvas */
+.runner-frame {
+  position: relative;
+  display: inline-block;
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.1),
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: #000;
+}
+
+.runner-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--violet-bright), transparent);
+  box-shadow: 0 0 20px 2px rgba(167, 139, 250, 0.5);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Canvas fixe 1280×720 */
+#wasm-canvas-container {
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  display: block;
+}
+
+canvas {
+  display: block;
+  width: 1280px !important;
+  height: 720px !important;
+}
+
+/* Effet scanline décoratif */
+.runner-scanline {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Coins décoratifs */
+.runner-corner {
+  position: absolute;
+  font-family: "Space Mono", monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  color: rgba(167, 139, 250, 0.5);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.runner-corner-tl { top: 0.6rem; left: -3rem; font-size: .75rem !important; }
+.runner-corner-tr { top: 0.6rem; right:-3rem; font-size: .75rem !important;}
+.runner-corner-bl { bottom: 0.6rem; left: -5.5rem; font-size: .75rem !important; }
+.runner-corner-br { bottom: 0.6rem; right: -3.5rem; font-size: .75rem !important; }
+
+/* Message mobile */
+.runner-mobile-msg {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: "Space Mono", monospace;
+  font-size: 0.8rem;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.runner-mobile-msg span {
+  font-size: 2rem;
+}
+
+/* ============================
+   RESPONSIVE runner — TABLET & MOBILE
+   ============================ */
+@media (max-width: 1024px) {
+  .runner-section {
+    padding: 3rem 5vw 6rem;
+  }
+}
+
+/* Sur tablette et mobile : cacher le canvas, montrer le message */
+@media (max-width: 1300px) {
+  .runner-frame {
+    display: none;
+  }
+  .runner-mobile-msg {
+    display: flex;
+  }
+}

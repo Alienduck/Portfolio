@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '../styles/Projects.css'
+import Runner from '../components/Runner'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -192,6 +193,7 @@ export default function Projects() {
           </a>
         </div>
       </section>
+      <Runner></Runner>
     </main>
   )
 }

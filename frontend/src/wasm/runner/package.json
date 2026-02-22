@@ -1,0 +1,15 @@
+{
+  "name": "runner",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "runner_bg.wasm",
+    "runner.js",
+    "runner.d.ts"
+  ],
+  "main": "runner.js",
+  "types": "runner.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
