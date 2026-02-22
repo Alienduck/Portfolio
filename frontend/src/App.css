@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+#wasm-canvas-container {
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  display: block;
+  width: 1280px !important;
+  height: 720px !important;
+}
