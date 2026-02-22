@@ -551,14 +551,15 @@
   content: "";
   position: absolute;
   top: -10px;
-  right: -150px;
+  right: -200px;
   width: 500px;
   height: 500px;
   background: radial-gradient(
     circle,
-    var(--card-color, rgba(124, 58, 237, 0.05)),
-    transparent 50%
+    var(--card-color, rgba(124, 58, 237, 1)),
+    transparent 100%
   );
+  filter: blur(50px) opacity(0.3);
   pointer-events: none;
 }
 
@@ -566,10 +567,20 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(124, 58, 237, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124, 58, 237, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(124, 58, 237, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.1) 1px, transparent 1px);
   background-size: 30px 30px;
   pointer-events: none;
+  animation: grid-translation 1s linear infinite;
+}
+
+@keyframes grid-translation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 30px;
+  }
 }
 
 .tl-card-bar {
