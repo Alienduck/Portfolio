@@ -255,8 +255,8 @@ section {
   color: var(--gold);
   font-weight: 900;
   text-shadow:
-    0 0 1px var(currentColor),
-    0 0 10px var(currentColor);
+    0 0 1px currentColor,
+    0 0 10px currentColor;
   animation: glowing 4s ease-in-out infinite;
 }
 
