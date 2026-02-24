@@ -61,15 +61,21 @@ canvas {
 .runner-scanline {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 1px);
+  background-size: 100% 4px;
   pointer-events: none;
   z-index: 1;
+  animation: scanning 1s linear infinite;
+}
+
+@keyframes scanning {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 4px;
+  }
 }
 
 /* Coins décoratifs */
@@ -87,6 +93,12 @@ canvas {
 .runner-corner-tr { top: 0.6rem; right:-3rem; font-size: .75rem !important;}
 .runner-corner-bl { bottom: 0.6rem; left: -5.5rem; font-size: .75rem !important; }
 .runner-corner-br { bottom: 0.6rem; right: -3.5rem; font-size: .75rem !important; }
+.personnal-msg {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  margin: auto;
+  text-align: center;
+}
 
 /* Message mobile */
 .runner-mobile-msg {
