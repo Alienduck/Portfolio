@@ -116,7 +116,7 @@ const FAQ = [
 
 function SheetPreview({ sheet }: { sheet: typeof SHEET_TYPES[0] }) {
   return (
-    <div className="sheet-preview" style={{ '--sheet-color': sheet.color, '--sheet-gradient': sheet.gradient } as React.CSSProperties}>
+    <div className="sheet-preview" style={{ '--sheet-color': sheet.color, '--sheet-gradient': sheet.gradient, opacity: 0 } as React.CSSProperties}>
       <div className="sheet-preview-header">
         <div className="sheet-preview-bar" />
         <div className="sheet-preview-meta">
@@ -269,7 +269,7 @@ export default function Courses() {
   // Re-animate preview on tab change
   useEffect(() => {
     gsap.from('.sheet-preview', {
-      opacity: 0, x: 20, duration: 0.4, ease: 'power2.out'
+      opacity: 1, x: 20, duration: 0.4, ease: 'linear'
     })
   }, [activeSheet])
 
@@ -315,7 +315,7 @@ export default function Courses() {
           <div className="courses-hero-cta">
             <a href="mailto:oneuillyr@gmail.com" className="btn-primary btn-large">
               <span>Rejoindre les cours</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
@@ -387,7 +387,7 @@ export default function Courses() {
             Trois types de <span className="gradient-text">contenus</span>
           </h2>
           <p className="sheets-sub">
-            Chaque fiche est rédigée en Markdown (Obsidian), structurée et lisible.
+            Chaque fiche est rédigée en Markdown avec <a href='https://obsidian.md/download' style={{ color: 'rgba(200, 0, 200, 1)', textDecoration: 'underline currentColor'}}>Obsidian</a>, structurée et lisible.
             Les projets sont libres — tu codes comme tu veux, je guide quand tu bloques.
           </p>
         </div>
