@@ -488,7 +488,7 @@
 
 .sheet-preview-tag {
   font-family: "Space Mono", monospace;
-  font-size: 0.52rem;
+  font-size: 0.6rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   font-weight: 600;
@@ -500,8 +500,8 @@
 }
 
 .sheet-preview-dots span {
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -514,12 +514,12 @@
 }
 
 .sheet-preview-icon {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .sheet-preview-title {
   font-family: "Bebas Neue", sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   letter-spacing: 0.06em;
   color: var(--text);
 }
@@ -546,7 +546,7 @@
 .sl-h2 {
   display: block;
   font-family: "Syne", sans-serif;
-  font-size: 0.82rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--sheet-color, var(--violet-bright));
   padding-top: 0.4rem;
