@@ -242,6 +242,11 @@ section {
   animation: pathPulse 2s infinite linear
 }
 
+.path-obvious {
+  position: relative;
+  z-index: 999;
+}
+
 @keyframes pathPulse {
   0%,
   100% {
