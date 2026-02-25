@@ -116,7 +116,7 @@ const FAQ = [
 
 function SheetPreview({ sheet }: { sheet: typeof SHEET_TYPES[0] }) {
   return (
-    <div className="sheet-preview" style={{ '--sheet-color': sheet.color, '--sheet-gradient': sheet.gradient, opacity: 0 } as React.CSSProperties}>
+    <div className="sheet-preview" style={{ '--sheet-color': sheet.color, '--sheet-gradient': sheet.gradient } as React.CSSProperties}>
       <div className="sheet-preview-header">
         <div className="sheet-preview-bar" />
         <div className="sheet-preview-meta">
@@ -269,7 +269,7 @@ export default function Courses() {
   // Re-animate preview on tab change
   useEffect(() => {
     gsap.from('.sheet-preview', {
-      opacity: 1, x: 20, duration: 0.4, ease: 'linear'
+      opacity: 0, x: 20, duration: 0.4, ease: 'linear'
     })
   }, [activeSheet])
 
