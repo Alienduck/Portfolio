@@ -216,6 +216,7 @@ function CoursesSection() {
         </a>
         <p className="courses-cta-note">30€ / mois · 15€ / 2 semaines · Fiches à vie 🎓</p>
       </div>
+      {/* <Link to="/courses" className='courses-link btn-secondary'>Plus d'informations</Link> */}
     </section>
   )
 }
