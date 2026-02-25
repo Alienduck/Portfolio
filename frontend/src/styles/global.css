@@ -237,6 +237,21 @@ section {
   }
 }
 
+.path-pulse {
+  opacity: 0.05;
+  animation: pathPulse 2s infinite linear
+}
+
+@keyframes pathPulse {
+  0%,
+  100% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.1;
+  }
+}
+
 .pulse {
   animation: blink 2s infinite ease-in-out;
 }

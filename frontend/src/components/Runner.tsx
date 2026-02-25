@@ -27,12 +27,15 @@ export default function Runner() {
             </div>
             <div className="runner-frame">
                 <div id="wasm-canvas-container" />
-                <div className="" />
+                <div className="runner-scanline" />
                 <div className="runner-corner runner-corner-tl">WASM</div>
                 <div className="runner-corner runner-corner-tr">RUST</div>
                 <div className="runner-corner runner-corner-bl">1280x720</div>
                 <div className="runner-corner runner-corner-br">60FPS</div>
             </div>
+            <p className="personnal-msg glow">
+                J'ai prit une journée entière à convertir le projet en WebAssembly
+            </p>
             <div className="runner-mobile-msg">
                 <span>🖥️</span>
                 <p>La démo interactive n'est disponible que sur desktop.</p>

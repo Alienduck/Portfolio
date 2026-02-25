@@ -8,6 +8,7 @@ import AmbientBackground from './components/AmbientBackground'
 import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
+import Courses from './pages/Courses'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -84,6 +85,7 @@ function AppContent() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/courses" element={<Courses />} />
           </Routes>
         </>
       )}
