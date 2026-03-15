@@ -108,6 +108,16 @@ export default function About() {
         scrollTrigger: { trigger: '.interests-grid', start: 'top 95%', once: true },
       })
 
+      gsap.from('.music-content > *', {
+        opacity: 0, y: 30, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+        scrollTrigger: { trigger: '.music-section', start: 'top 85%', once: true }
+      })
+
+      gsap.from('.music-player-wrap', {
+        opacity: 0, scale: 0.95, duration: 0.8, ease: 'power2.out', delay: 0.2,
+        scrollTrigger: { trigger: '.music-section', start: 'top 85%', once: true }
+      })
+
       gsap.to('.hidden-cross', { opacity: 0.15, duration: 2, yoyo: true, repeat: -1, ease: 'sine.inOut' })
     }, pageRef)
     return () => ctx.revert()
@@ -304,6 +314,30 @@ export default function About() {
               {item.highlight && <div className="interest-glow" />}
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* MUSIC */}
+      <section className="music-section">
+        <div className="music-container">
+          <div className="music-content">
+            <span className="section-tag">Bande-son</span>
+            <h2 className="section-title">Ce qui rythme mon <span className="gradient-text">code</span></h2>
+            <p className="music-desc">
+              Les meilleures OST que j'ai pu entendre jusqu'à maintenant. Faites les jeux d'ailleurs si ce n'est pas déjà fait.
+            </p>
+            <div className="music-visualizer">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="sound-bar" />
+              ))}
+            </div>
+          </div>
+          <div className="music-player-wrap">
+            <div className="music-player-glow" />
+            <div className="music-player-frame">
+              <iframe data-testid="embed-iframe" src="https://open.spotify.com/embed/playlist/4GJXiPh38Hdt7BZ3ixa6vU?utm_source=generator&theme=0" width="100%" height="500" allowFullScreen={ true } allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+          </div>
         </div>
       </section>
 
