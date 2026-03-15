@@ -337,12 +337,20 @@ export default function Home() {
 
     }, heroRef)
 
+    // Optimisation GSAP : quickTo évite de créer une nouvelle timeline à chaque pixel
+    const xToOrb = gsap.quickTo('.hero-orb-wrap', 'x', { duration: 1, ease: 'power2.out' })
+    const yToOrb = gsap.quickTo('.hero-orb-wrap', 'y', { duration: 1, ease: 'power2.out' })
+    const xToSvg = gsap.quickTo('.svg-deco', 'x', { duration: 1.5, ease: 'power2.out' })
+    const yToSvg = gsap.quickTo('.svg-deco', 'y', { duration: 1.5, ease: 'power2.out' })
+
     const onMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e
       const x = (clientX / window.innerWidth - 0.5) * 30
       const y = (clientY / window.innerHeight - 0.5) * 30
-      gsap.to('.hero-orb-wrap', { x, y: `+=${y * 0.3}`, duration: 1, ease: 'power2.out' })
-      gsap.to('.svg-deco', { x: -x * 0.5, y: -y * 0.5, duration: 1.5, ease: 'power2.out' })
+      xToOrb(x)
+      yToOrb(y * 0.3)
+      xToSvg(-x * 0.5)
+      yToSvg(-y * 0.5)
     }
 
     window.addEventListener('mousemove', onMouseMove)

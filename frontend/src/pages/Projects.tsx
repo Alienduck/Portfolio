@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, lazy, Suspense } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '../styles/Projects.css'
-import Runner from '../components/Runner'
+
+const Runner = lazy(() => import('../components/Runner'))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -75,6 +76,8 @@ export default function Projects() {
   const [filter, setFilter] = useState<Filter>('All')
   const [_hovered, setHovered] = useState<number | null>(null)
   const pageRef = useRef<HTMLElement>(null)
+  const runnerContainerRef = useRef<HTMLDivElement>(null)
+  const [showRunner, setShowRunner] = useState(false)
 
   const filtered = filter === 'All' ? PROJECTS : PROJECTS.filter(p => p.status === filter)
 
@@ -101,6 +104,19 @@ export default function Projects() {
         }
     })
   }, [filter])
+
+  // Lazy load Runner uniquement quand on scrolle en bas
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setShowRunner(true)
+        observer.disconnect() // On arrête d'observer une fois chargé
+      }
+    }, { rootMargin: '300px' })
+
+    if (runnerContainerRef.current) observer.observe(runnerContainerRef.current)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <main ref={pageRef} className="page projects-page">
@@ -193,7 +209,14 @@ export default function Projects() {
           </a>
         </div>
       </section>
-      <Runner></Runner>
+
+      <div ref={runnerContainerRef} style={{ minHeight: '500px', width: '100%', overflow: 'hidden' }}>
+        {showRunner && (
+          <Suspense fallback={null}>
+            <Runner />
+          </Suspense>
+        )}
+      </div>
     </main>
   )
 }
