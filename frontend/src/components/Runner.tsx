@@ -2,20 +2,43 @@ import { useEffect, useRef } from "react";
 import init, { start_game } from '../wasm/runner/runner.js';
 import '../styles/Runner.css';
 
+let cachedWasmContainer: HTMLDivElement | null = null;
+let isWasmInitialized = false;
+
 export default function Runner() {
-    const started = useRef(false);
+    const mountRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (started.current) return;
-        started.current = true;
+        if (!mountRef.current) return;
 
-        init().then(() => {
-            start_game();
-        });
+        if (!cachedWasmContainer) {
+            cachedWasmContainer = document.createElement('div');
+            cachedWasmContainer.id = 'wasm-canvas-container';
+            mountRef.current.appendChild(cachedWasmContainer);
+
+            if (!isWasmInitialized) {
+                isWasmInitialized = true;
+                init().then(() => start_game());
+            }
+        } else {
+            mountRef.current.appendChild(cachedWasmContainer);
+        }
     }, []);
 
     return (
         <div className="runner-section">
+            <style>{`
+                #wasm-canvas-container {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                #wasm-canvas-container canvas {
+                    max-width: 100% !important;
+                    height: auto !important;
+                }
+            `}</style>
             <div className="runner-header">
                 <span className="section-tag">DEMO INTERACTIVE</span>
                 <h2 className="section-title">
@@ -26,7 +49,7 @@ export default function Runner() {
                 </p>
             </div>
             <div className="runner-frame">
-                <div id="wasm-canvas-container" />
+                <div ref={mountRef} />
                 <div className="runner-scanline" />
                 <div className="runner-corner runner-corner-tl">WASM</div>
                 <div className="runner-corner runner-corner-tr">RUST</div>
