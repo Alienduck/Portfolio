@@ -181,7 +181,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
 
   return (
     <div className={`faq-item ${open ? 'open' : ''}`} style={{ '--faq-delay': `${index * 0.07}s` } as React.CSSProperties}>
-      <button className="faq-question" onClick={() => setOpen(o => !o)}>
+      <button className="faq-question" onClick={() => setOpen(o => !o)} style={{ borderBottom: !open ? 'none' : "2px dotted var(--violet)"}}>
         <span className="faq-num">{String(index + 1).padStart(2, '0')}</span>
         <span className="faq-q-text">{q}</span>
         <svg className="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s ease' }}>
@@ -191,11 +191,10 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
       <div className="faq-answer-grid" style={{
         display: 'grid',
         gridTemplateRows: open ? '1fr' : '0fr',
-        transition: 'grid-template-rows 0.35s ease-out, opacity 0.35s ease-out',
-        opacity: open ? 1 : 0
+        transition: 'grid-template-rows 0.35s ease-out'
       }}>
-        <div style={{ overflow: 'hidden' }}>
-          <p className="faq-answer" style={{ paddingTop: '1rem' }}>{a}</p>
+        <div style={{ overflow: 'hidden', opacity: open ? 1 : 0, transition: 'opacity 0.35s ease-out', paddingLeft: "20px" }}>
+          <p className="faq-answer" style={{ padding: '1rem 0 0.5rem', margin: 0, lineHeight: 1.7, color: 'var(--text-muted)' }}>{a}</p>
         </div>
       </div>
     </div>
