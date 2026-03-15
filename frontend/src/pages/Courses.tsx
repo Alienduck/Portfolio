@@ -178,29 +178,25 @@ function SheetPreview({ sheet }: { sheet: typeof SHEET_TYPES[0] }) {
 
 function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false)
-  const bodyRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const el = bodyRef.current
-    if (!el) return
-    if (open) {
-      gsap.fromTo(el, { height: 0, opacity: 0 }, { height: 'auto', opacity: 1, duration: 0.35, ease: 'power2.out' })
-    } else {
-      gsap.to(el, { height: 0, opacity: 0, duration: 0.25, ease: 'power2.in' })
-    }
-  }, [open])
 
   return (
     <div className={`faq-item ${open ? 'open' : ''}`} style={{ '--faq-delay': `${index * 0.07}s` } as React.CSSProperties}>
       <button className="faq-question" onClick={() => setOpen(o => !o)}>
         <span className="faq-num">{String(index + 1).padStart(2, '0')}</span>
         <span className="faq-q-text">{q}</span>
-        <svg className="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <svg className="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s ease' }}>
           <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
-      <div ref={bodyRef} className="faq-answer" style={{ height: 0, overflow: 'hidden', opacity: 0 }}>
-        <p>{a}</p>
+      <div className="faq-answer-grid" style={{
+        display: 'grid',
+        gridTemplateRows: open ? '1fr' : '0fr',
+        transition: 'grid-template-rows 0.35s ease-out, opacity 0.35s ease-out',
+        opacity: open ? 1 : 0
+      }}>
+        <div style={{ overflow: 'hidden' }}>
+          <p className="faq-answer" style={{ paddingTop: '1rem' }}>{a}</p>
+        </div>
       </div>
     </div>
   )
