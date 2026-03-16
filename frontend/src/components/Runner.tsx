@@ -14,14 +14,18 @@ export default function Runner() {
         if (!cachedWasmContainer) {
             cachedWasmContainer = document.createElement('div');
             cachedWasmContainer.id = 'wasm-canvas-container';
-            mountRef.current.appendChild(cachedWasmContainer);
+            if (!mountRef.current.contains(cachedWasmContainer)) {
+                mountRef.current.appendChild(cachedWasmContainer);
+            }
 
             if (!isWasmInitialized) {
                 isWasmInitialized = true;
                 init().then(() => start_game());
             }
         } else {
-            mountRef.current.appendChild(cachedWasmContainer);
+            if (!mountRef.current.contains(cachedWasmContainer)) {
+                mountRef.current.appendChild(cachedWasmContainer);
+            }
         }
     }, []);
 
