@@ -214,14 +214,11 @@ export default function About() {
             <p className="about-para about-hint">
               <span className="hint-mono">// hint : le <button className="gold" onClick={() => {
                 gsap.set('.path-glow', { strokeOpacity: 1} )
-                let golden_path = document.getElementById('mainPath');
-                golden_path?.classList.add('path-pulse');
+                gsap.to('#mainPath', { className: "+=path-pulse", duration: 0 })
               }} onMouseEnter={() => {
-                let golden_path = document.getElementById('mainPath');
-                golden_path?.classList.add('path-obvious');
+                gsap.to('#mainPath', { className: "+=path-obvious", duration: 0 })
               }} onMouseLeave={() => {
-                let golden_path = document.getElementById('mainPath');
-                golden_path?.classList.remove('path-obvious');
+                gsap.to('#mainPath', { className: "-=path-obvious", duration: 0 })
               }}>chemin</button> révèle les secrets</span>
             </p>
           </div>
